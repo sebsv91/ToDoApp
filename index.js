@@ -4,6 +4,9 @@ import express, { json } from "express";
 // Importación del router para las tareas
 import tasksRoutes from "./Routes/tasks.js";
 
+// Importación de la función creada para la conexión de base de datos
+import { connectDB } from "./db.js";
+
 // Creación nuestra app de express
 const app = express();
 
@@ -18,6 +21,9 @@ app.use(json());
 
 // Haciendo uso de las rutas en nuestra aplicación Express
 app.use("/api", tasksRoutes);
+
+// Llamamos a la función asincrona para conectar a la base de datos
+await connectDB();
 
 // Inicialización de servidor
 app.listen(port, () => {
