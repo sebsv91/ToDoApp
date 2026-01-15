@@ -1,5 +1,7 @@
+// Importación de mongoose
 import mongoose from "mongoose";
 
+// Creación de una variable con el valor de un nuevo schema de Mongoose
 const tasksSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -17,4 +19,5 @@ const tasksSchema = new mongoose.Schema({
   },
 });
 
+// Exportación de schema de mongoose
 export default mongoose.model("Task", tasksSchema);
