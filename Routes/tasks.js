@@ -1,5 +1,7 @@
 // Importación Router de express
 import { Router } from "express";
+import { validateSchema } from "../Middleware/validator.js";
+import { createTaskSchema, updateTaskSchema } from "../Schema/tasks.js";
 
 // Importación de los controladores de tareas para enrutamiento
 import {
@@ -16,8 +18,8 @@ const router = Router();
 // Declaración de metodos http, rutas y controladores
 router.get("/tasks", getTasks);
 router.get("/tasks/:id", getTask);
-router.post("/tasks", createTask);
-router.put("/tasks/:id", updateTask);
+router.post("/tasks", validateSchema(createTaskSchema), createTask);
+router.put("/tasks/:id", validateSchema(updateTaskSchema), updateTask);
 router.delete("/tasks/:id", deleteTask);
 
 // Exportación del router
