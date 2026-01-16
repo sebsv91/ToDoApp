@@ -16,16 +16,22 @@ export const getTasks = async (req, res) => {
   }
 };
 
+// Controlador para obtener una tarea en especifico usando un id
 export const getTask = async (req, res) => {
+  // Bloque try-catch para manejo de excepciones
   try {
+    // Creamos una variable para buscar una tarea de forma asincrona obteniendo el id desde la petición: req.params.id
     const taskFound = await Task.findById(req.params.id);
 
+    // Si no encuentra la tarea con ese ID, notificamos que la tarea no fue encontrada
     if (!taskFound) {
-      return res.status(404).json({ message: "Task not found" });
+      return res.status(404).json({ message: "Tarea no encontrada" });
     }
 
+    // Si fue encontrada, regresamos la tarea encontrada
     res.json(taskFound);
   } catch (error) {
+    // En caso de haber un error, asignamos un codigo 500 y regresamos un mensaje de error en formato JSON
     res.status(500).json({ errorMessage: "Error al obtener la tarea" });
   }
 };
@@ -73,18 +79,24 @@ export const deleteTask = async (req, res) => {
   }
 };
 
+// Controlador para actualizar una tarea
 export const updateTask = async (req, res) => {
+  // Bloque tr-catch para manejo de excepciones
   try {
+    // Buscamos una tarea y la actualizamos, la tarea se localiza usando el id proveniente de la petición: req.params.id, como segundo parametro pasamos el cuerpo de la petición con los valores a actualizar
     const taskFound = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
 
+    // Si no encontramos la tarea notificamos que no se encontro una tarea con dicho id
     if (!taskFound) {
-      return res.status(404).json({ message: "Task not found" });
+      return res.status(404).json({ message: "Tarea no encontrada" });
     }
 
+    // Retornamos en formato JSOn la tarea con las modificaciones
     res.json(taskFound);
   } catch (error) {
+    // En caso de haber un error, asignamos un codigo 500 y regresamos un mensaje de error en formato JSON
     res
       .status(500)
       .json({ errorMessage: "Error al actualizar la tarea", error });

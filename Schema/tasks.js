@@ -1,5 +1,7 @@
+// Importamos zod
 import { z } from "zod";
 
+// Creación de un nuevo schema de zod
 export const createTaskSchema = z.object({
   username: z
     .string({
@@ -18,6 +20,7 @@ export const createTaskSchema = z.object({
   expiration: z.number().positive(),
 });
 
+// Creación de un schema de zod para actualizar tareas
 export const updateTaskSchema = z.object({
   username: z
     .string({

@@ -1,6 +1,8 @@
 // Importación Router de express
 import { Router } from "express";
+// Importación de nuestro middleware validador
 import { validateSchema } from "../Middleware/validator.js";
+// Importación de schemas de zod
 import { createTaskSchema, updateTaskSchema } from "../Schema/tasks.js";
 
 // Importación de los controladores de tareas para enrutamiento
