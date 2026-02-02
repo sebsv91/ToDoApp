@@ -7,6 +7,9 @@ import tasksRoutes from "./Routes/tasks.js";
 // Importación de la función creada para la conexión de base de datos
 import { connectDB } from "./db.js";
 
+import cors from "cors";
+import { FRONTEND_URL } from "./config.js";
+
 // Creación nuestra app de express
 const app = express();
 
@@ -16,8 +19,15 @@ const port = 909;
 // Deshabilitación de la leyenda x-powered-by
 app.disable("x-powered-by");
 
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    credentials: true,
+  }),
+);
+
 // Parsear JSON payloads
-app.use(json());
+app.use(express.json());
 
 // Haciendo uso de las rutas en nuestra aplicación Express
 app.use("/api", tasksRoutes);

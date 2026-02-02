@@ -30,10 +30,29 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const createTask = async () => {
+  const createTask = async (task) => {
     try {
-      const response = await createProductRequest();
+      const response = await createProductRequest(task);
       console.log(response);
-    } catch (error) {}
+      setErrors([]);
+      return true;
+    } catch (error) {
+      console.log(error);
+      // setErrors(error.response.data);
+      return false;
+    }
   };
+
+  return (
+    <TasksContext.Provider
+      value={{
+        tasks,
+        getTasks,
+        createTask,
+        errors,
+      }}
+    >
+      {children}
+    </TasksContext.Provider>
+  );
 };

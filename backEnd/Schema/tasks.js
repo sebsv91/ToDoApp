@@ -3,7 +3,7 @@ import { z } from "zod";
 
 // Creación de un nuevo schema de zod
 export const createTaskSchema = z.object({
-  username: z
+  /* username: z
     .string({
       error: (issue) =>
         issue.input === undefined ? "This field is required" : "Not a string",
@@ -11,13 +11,14 @@ export const createTaskSchema = z.object({
     .min(4)
     .max(15)
     .trim(),
+  */
   task: z
     .string({
       error: (issue) =>
         issue.input === undefined ? "This field is required" : "Not a string",
     })
     .trim(),
-  expiration: z.number().positive(),
+  // expiration: z.number().positive(),
 });
 
 // Creación de un schema de zod para actualizar tareas

@@ -1,5 +1,6 @@
 import "./App.css";
 import { useForm } from "react-hook-form";
+import { useTasks } from "./context/tasks.jsx";
 
 function App() {
   const {
@@ -8,8 +9,19 @@ function App() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const { getTasks, createTask, errors: createErrors } = useTasks();
+
+  const onSubmit = async (data) => {
+    const payload = {
+      ...data,
+    };
+
+    console.log(payload);
+
+    const taskCreated = await createTask(payload);
+    if (taskCreated) {
+      console.log("Tarea creada");
+    }
   };
 
   return (
