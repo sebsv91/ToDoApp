@@ -18,7 +18,7 @@ export const createTaskSchema = z.object({
         issue.input === undefined ? "This field is required" : "Not a string",
     })
     .trim(),
-  // expiration: z.number().positive(),
+  expiration: z.number().positive(),
 });
 
 // Creación de un schema de zod para actualizar tareas

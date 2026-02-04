@@ -41,11 +41,12 @@ export const createTask = async (req, res) => {
   // Bloque tr-catch para manejo de excepciones
   try {
     // Deestructuración de un objeto para obtener los valores requeridos desde el cuerpo de la petición
-    const { task } = req.body;
+    const { task, expiration } = req.body;
 
     // Creación de una nueva tarea usando el schema de mongoose, con los valores de la petición
     const newTask = new Task({
       task,
+      expiration,
     });
 
     // Guardado de la tarea nueva en la base de datos de forma asincrona

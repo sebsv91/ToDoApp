@@ -14,12 +14,10 @@ const tasksSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  /*
   expiration: {
     type: Number,
     required: true,
   },
-  */
 });
 
 // Exportación de schema de mongoose

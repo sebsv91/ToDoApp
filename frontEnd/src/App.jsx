@@ -15,6 +15,7 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -24,6 +25,7 @@ function App() {
 
     const taskCreated = await createTask(payload);
     if (taskCreated) {
+      reset();
       console.log("Tarea creada");
     }
   };
@@ -37,13 +39,31 @@ function App() {
         <h1 className="text-5xl">ToDo App!</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex gap-5">
-          <input
-            type="text"
-            className="border w-xl text-2xl rounded-md p-1 outline-none"
-            {...register("task", {
-              required: { value: true, message: "Este campo es requerido" },
-            })}
-          />
+          <div className="flex flex-col gap-2 w-xl">
+            <input
+              type="text"
+              className="border text-xl rounded-md outline-none px-1"
+              {...register("task", {
+                required: { value: true, message: "Este campo es requerido" },
+              })}
+            />
+            <div className="flex gap-2 w-full justify-center">
+              <label htmlFor="">Expiration: (Number of days)</label>
+              <input
+                type="number"
+                className="border rounded-md px-1"
+                {...register("expiration", {
+                  required: {
+                    valueAsNumber: true,
+                    value: true,
+                    message: "Este campo es requerido",
+                  },
+                  valueAsNumber: true,
+                })}
+              />
+            </div>
+          </div>
+
           <button className="rounded-md px-6 py-2 text-base hover:cursor-pointer bg-green-600">
             +
           </button>
